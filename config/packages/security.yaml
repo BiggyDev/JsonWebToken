@@ -18,10 +18,12 @@ security:
             pattern:  ^/login
             stateless: true
             anonymous: true
+            provider: users
             json_login:
                 check_path:               /login_check
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
 
         register:
           pattern:  ^/register
@@ -32,7 +34,6 @@ security:
             pattern:   ^/api
             stateless: true
             anonymous: false
-            provider: users
             guard:
                 authenticators:
                 - lexik_jwt_authentication.jwt_token_authenticator
